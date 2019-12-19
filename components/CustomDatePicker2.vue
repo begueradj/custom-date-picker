@@ -7,23 +7,22 @@
           ref="menu1"
           v-model="menu1"
           :close-on-content-click="false"
-          :return-value.sync="date"
           transition="scale-transition"
           offset-y
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="dateFormatted"
-              @blur="date = parseDate(dateFormatted)"
+              v-model="selected"
+              v-on:input="$emit('input', $event)"
+              @blur="date = parseDate(value)"
               v-on="on"
-              :label="value"
               value
+              label="Date"
               color="green lighten-1"
             />
           </template>
           <v-date-picker
-            v-bind:value="value"
-            v-on:input="$emit('input', $event)"
+            v-model="selected"
             @input="menu1 = false"
             no-title
             header-color="green lighten-1"
@@ -48,12 +47,19 @@ export default {
   data () {
     return {
       menu1: null,
-      date: null,
-      dateFormatted: null
+      date: null
     }
   },
 
   computed: {
+    selected: {
+      get () {
+        return this.value
+      },
+      set (value) {
+        this.$emit('input', value)
+      }
+    },
     computedDateFormatted () {
       return this.formatDate(this.date)
     }
@@ -61,7 +67,7 @@ export default {
 
   watch: {
     date (val) {
-      this.dateFormatted = this.formatDate(this.date)
+      this.value = this.formatDate(this.date)
     }
   },
   methods: {
