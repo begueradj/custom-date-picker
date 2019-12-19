@@ -12,9 +12,11 @@
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="value"
+              v-bind:value="value"
+              v-on:input="$emit('input', $event)"
               @blur="date = parseDate(value)"
               v-on="on"
+              value
               label="Date"
               color="green lighten-1"
             />

@@ -1,4 +1,4 @@
-# custom-date-picker
+# Custom date picker
 
 > Custom date picker with Nuxt.js and Vuetify.js
 
