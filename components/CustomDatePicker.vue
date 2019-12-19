@@ -42,10 +42,6 @@ export default {
     value: {
       type: String,
       default: ''
-    },
-    icon: {
-      type: String,
-      default: ''
     }
   },
   data () {
